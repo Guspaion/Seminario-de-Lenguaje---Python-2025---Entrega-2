@@ -75,3 +75,15 @@ def generar_codigo(nombre):
     for caracter in codigo: 
         cod_final += caracter
     return cod_final
+
+#Ejercicio 8
+def es_anagrama(palabra, otra_palabra):
+    if len(palabra) != len(otra_palabra):
+        return False
+    otra_palabra = list(otra_palabra)
+    for letra in palabra:
+        if letra in otra_palabra:
+            otra_palabra.remove(letra)
+        else:
+            return False
+    return True
