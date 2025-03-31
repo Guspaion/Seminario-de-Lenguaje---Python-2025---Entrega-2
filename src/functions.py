@@ -87,3 +87,46 @@ def es_anagrama(palabra, otra_palabra):
         else:
             return False
     return True
+
+#Ejercicio 9
+def es_dato_vacio(nombre):
+    if(nombre is None) or (nombre.strip() == ""):
+        return True
+    return False
+
+def eliminar_espacios(nombre):
+    return " ".join(nombre.split())
+
+def capitalizar_nombre(nombre):
+    nombre_separado = nombre.split()
+    nombre_capitalizado = [termino.capitalize() for termino in nombre_separado]
+    return " ".join(nombre_capitalizado)
+
+def esta_duplicado(nombre, lista):
+    if nombre in lista:
+        return True
+    return False
+
+def normalizar_nombre(nombre):
+    tildes = "áéíóú"
+    sin_tildes = "aeiou"
+    nombre_normalizado = ""
+    for letra in nombre:
+        if letra in tildes:
+            nombre_normalizado += sin_tildes[tildes.index(letra)]
+        else:
+            nombre_normalizado += letra
+    return nombre_normalizado
+
+def procesar_lista(lista):
+    lista_final = []
+    for nombre in lista:
+        if es_dato_vacio(nombre):
+            continue
+        nombre = eliminar_espacios(nombre)
+        nombre = capitalizar_nombre(nombre)
+        nombre = normalizar_nombre(nombre)
+        if not esta_duplicado(nombre, lista_final):
+            lista_final.append(nombre)
+        lista_final.sort()
+    return lista_final
