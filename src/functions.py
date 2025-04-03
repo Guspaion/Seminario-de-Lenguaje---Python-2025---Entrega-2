@@ -132,6 +132,16 @@ def procesar_lista(lista):
     return lista_final
 
 #Ejercicio 10
+def inicializar_ronda_act():
+    ronda_act = {
+        'Shadow': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
+        'Blaze': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
+        'Viper': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
+        'Frost': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
+        'Reaper': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0}
+    }
+    return ronda_act
+
 def contabilizar_puntos(player):
     puntos = 0
     puntos += player['kills'] * 3
@@ -141,14 +151,13 @@ def contabilizar_puntos(player):
     return puntos
 
 def determinar_MVP(round):
-    MVP = None
+    puntos_MVP = 0
     nombre_MVP = ""
     for player, stats in round.items():
-        stats['puntos'] = contabilizar_puntos(stats)
-        if MVP is None or stats['puntos'] > MVP['puntos']:
-            MVP = stats
+        if puntos_MVP == 0 or stats['puntos'] > puntos_MVP:
+            puntos_MVP = stats['puntos']
             nombre_MVP = player
-    return nombre_MVP, MVP
+    return nombre_MVP, puntos_MVP
 
 def generar_tabla_ronda_act(round, ronda_act):   # No es necesario la tabla ronda_act, puedo modificar la tabla round y devolverla capaz
     for player, stats in round.items():
@@ -160,7 +169,7 @@ def generar_tabla_ronda_act(round, ronda_act):   # No es necesario la tabla rond
             ronda_act[player]['deaths'] = "Si"
         else:
             ronda_act[player]['deaths'] = "No"
-        ronda_act[player]['puntos'] += contabilizar_puntos(stats)
+        ronda_act[player]['puntos'] = contabilizar_puntos(stats)
     return ronda_act
 
 def generar_tabla_total(ronda_act, total_rondas, nombre_MVP):
@@ -169,7 +178,7 @@ def generar_tabla_total(ronda_act, total_rondas, nombre_MVP):
         total_rondas[player]['assists'] += stats['assists']
         if stats['deaths'] == "Si":
             total_rondas[player]['deaths'] += 1
-        total_rondas[player]['puntos'] += contabilizar_puntos(stats)
+        total_rondas[player]['puntos'] += stats['puntos']
     total_rondas[nombre_MVP]['MVP'] += 1
     return total_rondas
 
@@ -193,13 +202,3 @@ def imprimir_estadisticas_finales(total_rondas):
             str(stats['MVP']).ljust(10) + 
             str(stats['puntos']).ljust(10)
         )
-
-def inicializar_ronda_act():
-    ronda_act = {
-        'Shadow': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
-        'Blaze': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
-        'Viper': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
-        'Frost': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0},
-        'Reaper': {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0}
-    }
-    return ronda_act
