@@ -35,4 +35,4 @@ Siga estos pasos para instalar el entorno de trabajo:
 ## Notas Importantes
 
 - Si los pasos se siguieron correctamente debería tener dos carpetas en la interfaz de Jupyter, 'notebooks' y 'src', donde encontrara los `.ipynb` y el archivo `functions.py`respectivamente
-- `functions.py` debe encontrarse en la carpeta src para su correcta importación.
+- `functions.py` debe encontrarse en la carpeta 'src' para su correcta importación.
