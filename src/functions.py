@@ -159,7 +159,7 @@ def determinar_MVP(round):
             nombre_MVP = player
     return nombre_MVP, puntos_MVP
 
-def generar_tabla_ronda_act(round, ronda_act):   # No es necesario la tabla ronda_act, puedo modificar la tabla round y devolverla capaz
+def generar_tabla_ronda_act(round, ronda_act):
     for player, stats in round.items():
         if player not in ronda_act:
             ronda_act[player] = {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0}
