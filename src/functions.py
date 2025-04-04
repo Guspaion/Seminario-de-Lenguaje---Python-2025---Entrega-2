@@ -142,27 +142,25 @@ def inicializar_ronda_act():
     }
     return ronda_act
 
-def contabilizar_puntos(player):
+def contabilizar_puntos(stats):
     puntos = 0
-    puntos += player['kills'] * 3
-    puntos += player['assists']
-    if player['deaths']:
+    puntos += stats['kills'] * 3
+    puntos += stats['assists']
+    if stats['deaths']:
         puntos -= 1
     return puntos
 
 def determinar_MVP(round):
-    puntos_MVP = 0
+    puntos_MVP = -1000
     nombre_MVP = ""
     for player, stats in round.items():
-        if puntos_MVP == 0 or stats['puntos'] > puntos_MVP:
+        if stats['puntos'] > puntos_MVP:
             puntos_MVP = stats['puntos']
             nombre_MVP = player
     return nombre_MVP, puntos_MVP
 
 def generar_tabla_ronda_act(round, ronda_act):
     for player, stats in round.items():
-        if player not in ronda_act:
-            ronda_act[player] = {'kills': 0, 'assists': 0, 'deaths': 0, 'puntos': 0}
         ronda_act[player]['kills'] += stats['kills']
         ronda_act[player]['assists'] += stats['assists']
         if( stats['deaths']):
